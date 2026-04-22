@@ -179,9 +179,9 @@ function formatConfirmationDateParts(value) {
 }
 
 function toResponseLabel(response) {
-    if (response === "si") return "Si";
-    if (response === "no") return "No";
-    return "Pendiente";
+    if (response === "si") return "confirmado";
+    if (response === "no") return "no asistirán";
+    return "pendiente";
 }
 
 function normalizeSearchText(value) {
@@ -274,9 +274,15 @@ function downloadCsvFile(content, eventId) {
 
 function setSummaryValues(rows) {
     const totalGuests = rows.length;
-    const totalYes = rows.filter((row) => row.respuesta === "si").length;
-    const totalNo = rows.filter((row) => row.respuesta === "no").length;
-    const totalPending = totalGuests - totalYes - totalNo;
+    const totalYes = rows
+        .filter((row) => row && row.respuesta === "si")
+        .reduce((acc, row) => acc + (Number(row && row.cantidadConfirmada) || 0), 0);
+    const totalNo = rows
+        .filter((row) => row && row.respuesta === "no")
+        .reduce((acc, row) => acc + (Number(row && row.pasesAsignados) || 0), 0);
+    const totalPending = rows
+        .filter((row) => row && row.respuesta === "pendiente")
+        .reduce((acc, row) => acc + (Number(row && row.pasesAsignados) || 0), 0);
     const totalConfirmedPeople = rows
         .filter((row) => row.respuesta === "si")
         .reduce((acc, row) => acc + (Number(row.cantidadConfirmada) || 0), 0);
@@ -413,7 +419,7 @@ function renderMobileCards(rows, emptyMessage) {
         const lineDate = document.createElement("div");
         lineDate.className = "confirmation-card-line";
         const dateLabel = document.createElement("span");
-        dateLabel.textContent = "Fecha";
+        dateLabel.textContent = "Fecha de confirmación";
         const dateValue = document.createElement("strong");
         dateValue.textContent = dateParts.date;
         lineDate.append(dateLabel, dateValue);
@@ -421,7 +427,7 @@ function renderMobileCards(rows, emptyMessage) {
         const lineTime = document.createElement("div");
         lineTime.className = "confirmation-card-line";
         const timeLabel = document.createElement("span");
-        timeLabel.textContent = "Hora";
+        timeLabel.textContent = "Hora de confirmación";
         const timeValue = document.createElement("strong");
         timeValue.textContent = dateParts.time;
         lineTime.append(timeLabel, timeValue);

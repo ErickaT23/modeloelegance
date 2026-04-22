@@ -20,19 +20,19 @@
 
         <section class="dashboard-summary" aria-label="Resumen RSVP">
             <article class="summary-card">
-                <p class="summary-label">Total invitados</p>
+                <p class="summary-label">Total de Invitaciones</p>
                 <p class="summary-value" id="summary-total-guests">0</p>
             </article>
             <article class="summary-card">
-                <p class="summary-label">Confirmados sí</p>
+                <p class="summary-label">Invitados Confirmados</p>
                 <p class="summary-value" id="summary-yes">0</p>
             </article>
             <article class="summary-card">
-                <p class="summary-label">Confirmados no</p>
+                <p class="summary-label">Invitados que no asistirán</p>
                 <p class="summary-value" id="summary-no">0</p>
             </article>
             <article class="summary-card">
-                <p class="summary-label">Pendientes</p>
+                <p class="summary-label">Invitados con Confirmación Pendiente</p>
                 <p class="summary-value" id="summary-pending">0</p>
             </article>
             <article class="summary-card summary-card-highlight">
@@ -60,14 +60,17 @@
                     >
                 </div>
 
-                <button type="button" id="dashboard-clear" class="table-clear-btn">Limpiar</button>
-                <button type="button" id="dashboard-export" class="table-export-btn">Exportar CSV</button>
-
-                <div class="table-filters" role="tablist" aria-label="Filtrar confirmaciones">
-                    <button type="button" class="filter-chip is-active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
-                    <button type="button" class="filter-chip" data-filter="si" role="tab" aria-selected="false">Confirmados sí</button>
-                    <button type="button" class="filter-chip" data-filter="no" role="tab" aria-selected="false">Confirmados no</button>
-                    <button type="button" class="filter-chip" data-filter="pendiente" role="tab" aria-selected="false">Pendientes</button>
+                <div class="table-actions" aria-label="Acciones y filtros">
+                    <div class="table-actions-row table-actions-row-top" role="tablist" aria-label="Acciones principales y todos">
+                        <button type="button" id="dashboard-clear" class="table-clear-btn">Limpiar</button>
+                        <button type="button" id="dashboard-export" class="table-export-btn">Exportar CSV</button>
+                        <button type="button" class="filter-chip is-active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
+                    </div>
+                    <div class="table-actions-row table-actions-row-bottom" role="tablist" aria-label="Filtrar confirmaciones">
+                        <button type="button" class="filter-chip" data-filter="si" role="tab" aria-selected="false">Confirmados</button>
+                        <button type="button" class="filter-chip" data-filter="no" role="tab" aria-selected="false">No asistirán</button>
+                        <button type="button" class="filter-chip" data-filter="pendiente" role="tab" aria-selected="false">Pendientes</button>
+                    </div>
                 </div>
             </div>
 

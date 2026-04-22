@@ -185,22 +185,21 @@ body {
 }
 
 .dashboard-event-current {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 0 1rem;
-    padding: 0.3rem 0.62rem;
-    border: 1px solid rgba(107, 61, 61, 0.2);
-    background: rgba(232, 213, 205, 0.26);
-    color: var(--color-corinto-dark);
-    font-size: 0.67rem;
-    letter-spacing: 0.1em;
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 0 0.55rem;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
     text-transform: uppercase;
 }
 
 .table-controls {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) auto;
+    align-items: end;
     gap: 1rem;
     margin-bottom: 1rem;
 }
@@ -280,10 +279,34 @@ body {
     box-shadow: 0 0 0 3px rgba(139, 77, 77, 0.1);
 }
 
-.table-filters {
+.table-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.45rem;
+}
+
+.table-actions-row {
     display: inline-flex;
     flex-wrap: wrap;
     gap: 0.45rem;
+    justify-content: flex-end;
+}
+
+.table-actions-row-top {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+}
+
+.table-actions-row-top > * {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.16rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .filter-chip {
@@ -606,7 +629,7 @@ body {
     }
 
     .table-controls {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: stretch;
         gap: 0.72rem;
     }
@@ -615,16 +638,22 @@ body {
         min-width: 0;
     }
 
-    .table-clear-btn {
-        align-self: flex-start;
-    }
-
-    .table-export-btn {
-        align-self: flex-start;
-    }
-
-    .table-filters {
+    .table-actions {
+        align-items: stretch;
         width: 100%;
+    }
+
+    .table-actions-row {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .table-actions-row-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .table-actions-row-top > :last-child {
+        grid-column: 1 / -1;
     }
 
     .dashboard-table-panel {
@@ -689,6 +718,14 @@ body {
     .table-export-btn {
         font-size: 0.65rem;
         padding: 0.5rem 0.8rem;
+    }
+
+    .table-actions-row-top {
+        grid-template-columns: 1fr;
+    }
+
+    .table-actions-row-top > :last-child {
+        grid-column: auto;
     }
 
     .status-badge {
